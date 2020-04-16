@@ -1,25 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-function App() {
+import "./assets/css/bootstrap.min.css";
+import "./assets/scss/now-ui-kit.scss";
+import "./assets/demo/demo.css";
+
+import routes from './routes';
+import Main from './templates/Main';
+
+const PrivateRoute = ({ Component, ...otherProps }) => {  
+    return <Main component={Component} />;  
+}
+
+function App() {  
+  React.useEffect(() => {
+    document.body.classList.add("profile-page");
+    document.body.classList.add("sidebar-collapse");
+    document.documentElement.classList.remove("nav-open");
+    return function cleanup() {
+    document.body.classList.remove("profile-page");
+    document.body.classList.remove("sidebar-collapse");
+    };
+});  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        {routes.map(route => <Route exact path={route.path} render={() => <PrivateRoute Component={route.component} />} />)}        
+    </Router>
   );
 }
 
