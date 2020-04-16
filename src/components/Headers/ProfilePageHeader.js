@@ -37,7 +37,7 @@ function ProfilePageHeader() {
         ></div>
         <Container>
           <div className="photo-container">
-            <img alt="..." src={require("../../assets/img/ryan.jpg")}></img>
+            <img alt="..." src={require("../../assets/img/foto.jpeg")}></img>
           </div>
           <h3 className="title">Douglas Santos</h3>
           <p className="category">Programador</p>                    
